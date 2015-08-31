@@ -9,7 +9,7 @@ instance Num Positive where
     S x * y = y + x * y
     negate = error "Can't negate a positive number."
     abs = id
-    signum _ = One
+    signum _ = 1
     fromInteger = toEnum . fromIntegral
 
 instance Enum Positive where

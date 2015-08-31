@@ -1,14 +1,20 @@
 module Test where
 
-import Probability
+import           Probability
+import Text.Printf
 
 main :: IO ()
-main = print $ showP test
+main = printf "%f%%" $ 100 * chance test
+
+roulette :: Prob Integer
+roulette = choose [0..36]
 
 flipP :: Prob Bool
 flipP = choose [True, False]
 
 test :: Prob Bool
 test = normalize $ do
-    flips <- sequence [flipP, flipP, flipP, flipP]
-    return $ and flips
+    spin1 <- roulette
+    spin2 <- roulette
+    flip1 <- flipP
+    return $ spin1 == 13 && spin2 == 13 && flip1
